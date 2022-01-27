@@ -1,0 +1,26 @@
+{
+  "name": "fund-scraper",
+  "version": "0.0.0",
+  "description": "Scrape quotes of various funds",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lihop/fund-scraper.git"
+  },
+  "author": "Leroy Hopson",
+  "license": "CC0-1.0",
+  "bugs": {
+    "url": "https://github.com/lihop/fund-scraper/issues"
+  },
+  "homepage": "https://github.com/lihop/fund-scraper#readme",
+  "dependencies": {
+    "better-sqlite3": "^7.4.6",
+    "express": "^4.17.2",
+    "puppeteer": "^13.0.1",
+    "se-scraper": "^1.5.7",
+    "sqlite3": "^5.0.2"
+  }
+}

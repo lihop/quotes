@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText: 2022 Leroy Hopson <copyright@leroy.geek.nz>
+#
+# SPDX-License-Identifier: CC0-1.0
+name: "Update Quotes"
+
+on:
+  push:
+  schedule:
+    - cron: 0 3,9,23 * * *
+
+jobs:
+  scrape:
+    name: "Update Quotes"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: REUSE Compliance Check
+        uses: fsfe/reuse-action@v1
+      - uses: actions/setup-python@v2
+      - run: pip install -r requirements.txt
+      - run: pip install sqlite-utils
+      - name: Install newer version of sqlite3
+        run: |
+          mkdir sqlite3 && cd sqlite3
+          wget https://www.sqlite.org/2022/sqlite-autoconf-3370200.tar.gz
+          tar xvfz sqlite-autoconf-3370200.tar.gz
+          cd sqlite-autoconf-3370200
+          ./configure
+          make
+          sudo make install
+      - run: ./scrape.sh
+      - name: Update quotes
+        uses: JamesIves/github-pages-deploy-action@v4.2.2
+        with:
+          branch: gh-pages
+          folder: quotes
