@@ -12,9 +12,10 @@ import batdata
 import math
 from bs4 import BeautifulSoup as bs
 from datetime import datetime
+from tabula import read_pdf
 
-HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
+HEADERS = { 'User-Agent': USER_AGENT }
 
 con = sqlite3.connect("quotes.db")
 cur = con.cursor()
@@ -59,26 +60,21 @@ assert date and price, "Could not determine date and/or price."
 con.execute("REPLACE INTO quotes VALUES('FND1423.NZ', ?, ?)", [date, price])
 con.commit()
 
-# FND79.NZ AMP Capital NZ Fixed Interest Fund
-# FND8205.NZ AMP NZ Shares Index Fund
-# FND8207.NZ AMP All Country Global Shares Index Fund
+# FND79.NZ Macquarie NZ Fixed Interest Fund
+# FND8205.NZ Macquarie NZ Shares Index Fund
+# FND8207.NZ Macquarie All Country Global Shares Index Fund
 funds = [
-    # Funds acquired by Macquarie Asset Management, so skip for now.
-    # {'symbol': 'FND79.NZ', 'url': 'https://www.ampcapital.com/nz/en/investments/funds/fixed-interest/amp-capital-nz-fixed-interest-fund', 'spread': 0.000992},
-    # {'symbol': 'FND8205.NZ', 'url': 'https://www.ampcapital.com/nz/en/investments/funds/index-funds/nz-shares-index-fund', 'spread': 0.0027},
-    # {'symbol': 'FND8207.NZ', 'url': 'https://www.ampcapital.com/nz/en/investments/funds/index-funds/all-country-global-shares-index-fund', 'spread': 0.0007},
+    {'symbol': 'FND79.NZ', 'product_code': 'AIF F' },
+    {'symbol': 'FND8205.NZ', 'product_code': 'AIF PE' },
+    {'symbol': 'FND8207.NZ', 'product_code': 'AIF PI' },
 ]
+dfs = read_pdf('https://secure.ampcapital.co.nz/shared/DailyUnitPrices.pdf', user_agent=USER_AGENT, pages=1);
+df = dfs[0]
 for fund in funds:
-    res = requests.get(fund['url'])
-    soup = bs(res.text, 'html.parser')
-    buy = float(soup.find_all('div', {'class': 'ht-highlight_color'})[1].text)
-    sell = float(soup.find_all('div', {'class': 'ht-highlight_color'})[2].text)
-    price = round(buy - (buy * fund['spread']), 4)
-    sell_adjusted = round(sell + (sell * fund['spread']), 4)
-    assert math.isclose(
-        price, sell_adjusted, rel_tol=0.0001), "buy/sell prices not equal after adjusting for buy/sell spread."
-    date_str = soup.find_all("div", {"class": "ht-meta"})[2].text
-    date = datetime.strptime(date_str, 'As at %d %b %Y').strftime('%Y-%m-%d')
+    row = df.loc[df['Product Code'] == fund['product_code']]
+    price = row['Base Price'].values[0]
+    date_str = row['Date'].values[0]
+    date = datetime.strptime(date_str, '%d/%m/%Y').strftime('%Y-%m-%d')
     assert date and price, "Could not determine date and/or price."
     con.execute("REPLACE INTO quotes VALUES(?, ?, ?)",
                 [fund['symbol'], date, price])
