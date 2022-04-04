@@ -63,9 +63,10 @@ con.commit()
 # FND8205.NZ AMP NZ Shares Index Fund
 # FND8207.NZ AMP All Country Global Shares Index Fund
 funds = [
-    {'symbol': 'FND79.NZ', 'url': 'https://www.ampcapital.com/nz/en/investments/funds/fixed-interest/amp-capital-nz-fixed-interest-fund', 'spread': 0.000992},
-    {'symbol': 'FND8205.NZ', 'url': 'https://www.ampcapital.com/nz/en/investments/funds/index-funds/nz-shares-index-fund', 'spread': 0.0027},
-    {'symbol': 'FND8207.NZ', 'url': 'https://www.ampcapital.com/nz/en/investments/funds/index-funds/all-country-global-shares-index-fund', 'spread': 0.0007},
+    # Funds acquired by Macquarie Asset Management, so skip for now.
+    # {'symbol': 'FND79.NZ', 'url': 'https://www.ampcapital.com/nz/en/investments/funds/fixed-interest/amp-capital-nz-fixed-interest-fund', 'spread': 0.000992},
+    # {'symbol': 'FND8205.NZ', 'url': 'https://www.ampcapital.com/nz/en/investments/funds/index-funds/nz-shares-index-fund', 'spread': 0.0027},
+    # {'symbol': 'FND8207.NZ', 'url': 'https://www.ampcapital.com/nz/en/investments/funds/index-funds/all-country-global-shares-index-fund', 'spread': 0.0007},
 ]
 for fund in funds:
     res = requests.get(fund['url'])
