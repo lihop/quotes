@@ -21,6 +21,6 @@
     "express": "^4.17.2",
     "puppeteer": "^13.0.1",
     "se-scraper": "^1.5.7",
-    "sqlite3": "^5.0.2"
+    "sqlite3": "^5.0.3"
   }
 }
