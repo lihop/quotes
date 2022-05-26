@@ -2,8 +2,13 @@
 #
 # SPDX-License-Identifier: CC0-1.0
 _build/
+cypress/fixtures/
+cypress/plugins/
+cypress/support/
+cypress/videos/
 node_modules/
 quotes/
+kernel_quotes.json
 quotes.db
 *.swp
 .venv/

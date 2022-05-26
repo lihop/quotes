@@ -17,10 +17,8 @@
   },
   "homepage": "https://github.com/lihop/fund-scraper#readme",
   "dependencies": {
-    "better-sqlite3": "^7.4.6",
-    "express": "^4.17.2",
-    "puppeteer": "^13.0.1",
-    "se-scraper": "^1.5.7",
-    "sqlite3": "^5.0.2"
+    "cypress": "^9.6.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.3"
   }
 }

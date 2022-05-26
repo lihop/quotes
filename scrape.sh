@@ -5,7 +5,7 @@
 set -e
 cd "$(dirname "$0")"
 
-SYMBOLS=("FND20410.NZ" "FND1423.NZ" "FND2387.NZ" "FND79.NZ" "FND8205.NZ" "FND8207.NZ" "FUEMAV30.VN" "VAN1579.AU")
+SYMBOLS=("FND20410.NZ" "FND1423.NZ" "FND2387.NZ" "FND79.NZ" "FND8205.NZ" "FND8207.NZ" "FUEMAV30.VN" "VAN1579.AU" "FND37626.NZ" "FND37632.NZ" "FND37633.NZ")
 
 # Activate python virtual environment if available.
 VENV_FILE=.venv/bin/activate
@@ -26,6 +26,10 @@ done
 
 # Re-import latest quotes.
 cat quotes/latest.json | sqlite-utils insert quotes.db quotes - --pk symbol --pk date --replace
+
+# Import Kernel quotes.
+cat kernel_quotes.json | sqlite-utils insert quotes.db quotes - --pk symbol --pk date --replace
+rm kernel_quotes.json
 
 # Re-export all quotes in JSON and CSV format.
 for format in "json" "csv"; do
