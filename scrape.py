@@ -27,18 +27,18 @@ cur.execute(
 con.commit()
 
 # FND20410.NZ Foundation Series Growth Fund
-#res = requests.get(
-#    "https://iisolutions.co.nz/fund-hosting/documents-and-reporting-2/", headers=HEADERS)
-#table = pd.read_html(res.content)[1]
-#for fund in table.iterrows():
-#    if fund[1]['Funds'] != "Foundation Series Growth Fund":
-#        continue
-#    price = fund[1]['Unit Price']
-#    date = datetime.strptime(fund[1]['Date'], '%d-%b-%y').strftime('%Y-%m-%d')
-#    assert date and price, "Could not determine date and/or price."
-#    con.execute("REPLACE INTO quotes VALUES('FND20410.NZ', ?, ?)",
-#                [date, price])
-#    con.commit()
+res = requests.get(
+    "https://iisolutions.co.nz/fund-hosting/documents-and-reporting-2/", headers=HEADERS)
+table = pd.read_html(res.content)[1]
+for fund in table.iterrows():
+    if fund[1]['Funds'] != "Foundation Series Growth Fund":
+        continue
+    price = fund[1]['Unit Price']
+    date = datetime.strptime(fund[1]['Date'], '%d-%b-%y').strftime('%Y-%m-%d')
+    assert date and price, "Could not determine date and/or price."
+    con.execute("REPLACE INTO quotes VALUES('FND20410.NZ', ?, ?)",
+                [date, price])
+    con.commit()
 
 # VAN1579.AU Vanguard International Shares Select Exclusions Index Fund
 res = requests.get(

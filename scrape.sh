@@ -5,7 +5,7 @@
 set -e
 cd "$(dirname "$0")"
 
-SYMBOLS=("FND1423.NZ" "FND2387.NZ" "FND79.NZ" "FND8205.NZ" "FND8207.NZ" "FUEMAV30.VN" "VAN1579.AU")
+SYMBOLS=("FND20410.NZ" "FND1423.NZ" "FND2387.NZ" "FND79.NZ" "FND8205.NZ" "FND8207.NZ" "FUEMAV30.VN" "VAN1579.AU")
 
 # Activate python virtual environment if available.
 VENV_FILE=.venv/bin/activate
@@ -21,11 +21,11 @@ sqlite3 -header -json quotes.db "SELECT * FROM quotes;" > quotes/latest.json
 
 # Import historical quotes.
 for symbol in ${SYMBOLS[@]}; do
-	(wget -O - https://lihop.github.io/fund-scraper/${symbol}.json || echo "[]") | cat | sqlite-utils insert quotes.db quotes - --pk=symbol,date --replace
+	(wget -O - https://lihop.github.io/fund-scraper/${symbol}.json || echo "[]") | cat | sqlite-utils insert quotes.db quotes - --pk symbol --pk date --replace
 done
 
 # Re-import latest quotes.
-cat quotes/latest.json | sqlite-utils insert quotes.db quotes - --pk=symbol,date --replace
+cat quotes/latest.json | sqlite-utils insert quotes.db quotes - --pk symbol --pk date --replace
 
 # Re-export all quotes in JSON and CSV format.
 for format in "json" "csv"; do
