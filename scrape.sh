@@ -34,5 +34,5 @@ for format in "json" "csv"; do
 	done
 done
 
-# Format files.
-npx prettier --write .
+# Format JSON files.
+npx prettier --write quotes/*.json
