@@ -24,7 +24,8 @@ describe("", () => {
     cy.get('button[type="submit"]').click();
     cy.intercept("/api/*").as("api");
     cy.wait("@api", { timeout: 60000 });
-    cy.get('a[href="/dashboard/"]', { timeout: 60000 }).click({ force: true });
+    cy.get('a[href="/invest/"]', { timeout: 60000 }).click({ force: true });
+    cy.visit("https://my.kernelwealth.co.nz/invest/marketplace");
     cy.intercept("https://chelly.kernelwealth.co.nz/api/Marketplace").as(
       "Marketplace"
     );
