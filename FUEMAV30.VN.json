@@ -336,5 +336,6 @@
     "price": 14509.999999999999999
   },
   { "symbol": "FUEMAV30.VN", "date": "2022-06-23", "price": 14600.0 },
-  { "symbol": "FUEMAV30.VN", "date": "2022-06-24", "price": 14550.0 }
+  { "symbol": "FUEMAV30.VN", "date": "2022-06-24", "price": 14550.0 },
+  { "symbol": "FUEMAV30.VN", "date": "2022-06-27", "price": 14630.0 }
 ]
