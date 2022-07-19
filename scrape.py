@@ -8,7 +8,6 @@ import json
 import sqlite3
 import dateutil.parser
 import pandas as pd
-import batdata
 import math
 from bs4 import BeautifulSoup as bs
 from datetime import datetime
@@ -96,13 +95,12 @@ for fund in funds:
 #con.commit()
 
 # FUEMAV30.VN MAFM VN30 ETF
-vnd = batdata.Vnd()
-now = datetime.now()
-date = now.strftime('%Y%m%d')
-hist = vnd.hist("FUEMAV30", "close", date, date).json
-for quote in hist:
-    date = quote['tradingDate']
-    price = quote['close'] * 1000
+res = requests.get("https://finance.vietstock.vn/FUEMAV30-quy-etf-mafm-vn30.htm", headers=HEADERS)
+table = pd.read_html(res.text)[1]
+for row in table.iterrows():
+    date = row[1]["Ngày"]
+    price = row[1]["Giá đóng cửa"]
+    assert date and price, "Could not determine date and/or price."
     con.execute("REPLACE INTO quotes VALUES('FUEMAV30.VN', ?, ?)",
                 [date, price])
     con.commit()
