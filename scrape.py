@@ -98,7 +98,8 @@ for fund in funds:
 res = requests.get("https://finance.vietstock.vn/FUEMAV30-quy-etf-mafm-vn30.htm", headers=HEADERS)
 table = pd.read_html(res.text)[1]
 for row in table.iterrows():
-    date = row[1]["Ngày"]
+    date_str = row[1]["Ngày"]
+    date = datetime.strptime(date_str, '%d/%m/%Y').strftime('%Y-%m-%d')
     price = row[1]["Giá đóng cửa"]
     assert date and price, "Could not determine date and/or price."
     con.execute("REPLACE INTO quotes VALUES('FUEMAV30.VN', ?, ?)",
