@@ -62,22 +62,22 @@ con.commit()
 # FND79.NZ Macquarie NZ Fixed Interest Fund
 # FND8205.NZ Macquarie NZ Shares Index Fund
 # FND8207.NZ Macquarie All Country Global Shares Index Fund
-funds = [
-    {'symbol': 'FND79.NZ', 'product_code': 'AIF F' },
-    {'symbol': 'FND8205.NZ', 'product_code': 'AIF PE' },
-    {'symbol': 'FND8207.NZ', 'product_code': 'AIF PI' },
-]
-dfs = read_pdf('https://secure.ampcapital.co.nz/shared/DailyUnitPrices.pdf', user_agent=USER_AGENT, pages=1);
-df = dfs[0]
-for fund in funds:
-    row = df.loc[df['Product Code'] == fund['product_code']]
-    price = row['Base Price'].values[0]
-    date_str = row['Date'].values[0]
-    date = datetime.strptime(date_str, '%d/%m/%Y').strftime('%Y-%m-%d')
-    assert date and price, "Could not determine date and/or price."
-    con.execute("REPLACE INTO quotes VALUES(?, ?, ?)",
-                [fund['symbol'], date, price])
-    con.commit()
+#funds = [
+#    {'symbol': 'FND79.NZ', 'product_code': 'AIF F' },
+#    {'symbol': 'FND8205.NZ', 'product_code': 'AIF PE' },
+#    {'symbol': 'FND8207.NZ', 'product_code': 'AIF PI' },
+#]
+#dfs = read_pdf('https://secure.ampcapital.co.nz/shared/DailyUnitPrices.pdf', user_agent=USER_AGENT, pages=1);
+#df = dfs[0]
+#for fund in funds:
+#    row = df.loc[df['Product Code'] == fund['product_code']]
+#    price = row['Base Price'].values[0]
+#    date_str = row['Date'].values[0]
+#    date = datetime.strptime(date_str, '%d/%m/%Y').strftime('%Y-%m-%d')
+#    assert date and price, "Could not determine date and/or price."
+#    con.execute("REPLACE INTO quotes VALUES(?, ?, ?)",
+#                [fund['symbol'], date, price])
+#    con.commit()
 
 # FND2387.NZ Hunter Global Fixed Interest Fund
 #res = requests.get(
