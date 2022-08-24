@@ -9,9 +9,11 @@ import sqlite3
 import dateutil.parser
 import pandas as pd
 import math
+import warnings
 from bs4 import BeautifulSoup as bs
 from datetime import datetime
 from tabula import read_pdf
+from urllib.error import HTTPError
 
 USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
 HEADERS = { 'User-Agent': USER_AGENT }
@@ -67,17 +69,20 @@ funds = [
     {'symbol': 'FND8205.NZ', 'product_code': 'AIF PE' },
     {'symbol': 'FND8207.NZ', 'product_code': 'AIF PI' },
 ]
-dfs = read_pdf('https://secure.macquarie.co.nz/shared/DailyUnitPrices.pdf', user_agent=USER_AGENT, pages=1);
-df = dfs[0]
-for fund in funds:
-    row = df.loc[df['Product Code'] == fund['product_code']]
-    price = row['Base Price'].values[0]
-    date_str = row['Date'].values[0]
-    date = datetime.strptime(date_str, '%d/%m/%Y').strftime('%Y-%m-%d')
-    assert date and price, "Could not determine date and/or price."
-    con.execute("REPLACE INTO quotes VALUES(?, ?, ?)",
-                [fund['symbol'], date, price])
-    con.commit()
+try:
+    dfs = read_pdf('https://secure.macquarie.co.nz/shared/DailyUnitPrices.pdf', user_agent=USER_AGENT, pages=1);
+    df = dfs[0]
+    for fund in funds:
+        row = df.loc[df['Product Code'] == fund['product_code']]
+        price = row['Base Price'].values[0]
+        date_str = row['Date'].values[0]
+        date = datetime.strptime(date_str, '%d/%m/%Y').strftime('%Y-%m-%d')
+        assert date and price, "Could not determine date and/or price."
+        con.execute("REPLACE INTO quotes VALUES(?, ?, ?)",
+                    [fund['symbol'], date, price])
+        con.commit()
+except HTTPError:
+    warnings.warn("Could not find Macquarie daily unit prices.")
 
 # FND2387.NZ Hunter Global Fixed Interest Fund
 #res = requests.get(
