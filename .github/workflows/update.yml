@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: REUSE Compliance Check
         uses: lihop/reuse-action@v1
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v4
       - run: pip install -r requirements.txt
       - run: pip install sqlite-utils
       - name: Install newer version of sqlite3
