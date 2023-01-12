@@ -32,9 +32,9 @@ res = requests.get(
     "https://iisolutions.co.nz/fund-hosting/documents-and-reporting-2/", headers=HEADERS)
 table = pd.read_html(res.content)[1]
 for fund in table.iterrows():
-    if fund[1]['Funds'] != "Foundation Series Growth Fund":
+    if fund[1]['Name'] != "Foundation Series Growth Fund":
         continue
-    price = fund[1]['Unit Price']
+    price = fund[1]['Unit_Price']
     date = datetime.strptime(fund[1]['Date'], '%d-%b-%y').strftime('%Y-%m-%d')
     assert date and price, "Could not determine date and/or price."
     con.execute("REPLACE INTO quotes VALUES('FND20410.NZ', ?, ?)",
@@ -46,9 +46,9 @@ res = requests.get(
     "https://iisolutions.co.nz/fund-hosting/documents-and-reporting-2/", headers=HEADERS)
 table = pd.read_html(res.content)[1]
 for fund in table.iterrows():
-    if fund[1]['Funds'] != "Foundation Series Total World Fund":
+    if fund[1]['Name'] != "Foundation Series Total World Fund":
         continue
-    price = fund[1]['Unit Price']
+    price = fund[1]['Unit_Price']
     date = datetime.strptime(fund[1]['Date'], '%d-%b-%y').strftime('%Y-%m-%d')
     assert date and price, "Could not determine date and/or price."
     con.execute("REPLACE INTO quotes VALUES('FND40819.NZ', ?, ?)",
