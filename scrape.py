@@ -35,7 +35,7 @@ for fund in table.iterrows():
     if fund[1]['Name'] != "Foundation Series Growth Fund":
         continue
     price = fund[1]['Unit_Price']
-    date = datetime.strptime(fund[1]['Date'], '%d-%b-%y').strftime('%Y-%m-%d')
+    date = datetime.strptime(fund[1]['Date'], '%Y-%m-%d').strftime('%Y-%m-%d')
     assert date and price, "Could not determine date and/or price."
     con.execute("REPLACE INTO quotes VALUES('FND20410.NZ', ?, ?)",
                 [date, price])
@@ -49,7 +49,7 @@ for fund in table.iterrows():
     if fund[1]['Name'] != "Foundation Series Total World Fund":
         continue
     price = fund[1]['Unit_Price']
-    date = datetime.strptime(fund[1]['Date'], '%d-%b-%y').strftime('%Y-%m-%d')
+    date = datetime.strptime(fund[1]['Date'], '%Y-%m-%d').strftime('%Y-%m-%d')
     assert date and price, "Could not determine date and/or price."
     con.execute("REPLACE INTO quotes VALUES('FND40819.NZ', ?, ?)",
                 [date, price])
