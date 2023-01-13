@@ -9,33 +9,33 @@ on:
     - cron: 0 8,23 * * *
 
 jobs:
+  check-reuse:
+    name: "Check REUSE Compliance"
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: fsfe/reuse-action@v1
   scrape:
     name: "Update Quotes"
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v2
-      - name: REUSE Compliance Check
-        uses: lihop/reuse-action@v1
-      - uses: actions/setup-python@v4
+      - uses: actions/checkout@v3
+      - run: npm ci
       - run: pip install -r requirements.txt
       - run: pip install sqlite-utils
-      - name: Install newer version of sqlite3
+      - uses: awalsh128/cache-apt-pkgs-action@v1
+        with:
+          packages: sqlite3
+          debug: 'false'
+      - name: Scrape quotes
         run: |
-          mkdir sqlite3 && cd sqlite3
-          wget https://www.sqlite.org/2022/sqlite-autoconf-3370200.tar.gz
-          tar xvfz sqlite-autoconf-3370200.tar.gz
-          cd sqlite-autoconf-3370200
-          ./configure
-          make
-          sudo make install
-      - run: npm ci
-      - run: $(npm bin)/cypress run
+          $(npm bin)/cypress run
+          ./scrape.sh
         env:
           CYPRESS_KERNEL_USERNAME: ${{ secrets.CYPRESS_KERNEL_USERNAME }}
           CYPRESS_KERNEL_PASSWORD: ${{ secrets.CYPRESS_KERNEL_PASSWORD }}
-      - run: ./scrape.sh
       - name: Update quotes
-        uses: lihop/github-pages-deploy-action@v4.2.2
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: quotes
