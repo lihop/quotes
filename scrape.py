@@ -12,6 +12,7 @@ import math
 import warnings
 from bs4 import BeautifulSoup as bs
 from datetime import datetime
+from requests.adapters import HTTPAdapter, Retry
 from tabula import read_pdf
 from urllib.error import HTTPError
 
@@ -21,6 +22,11 @@ HEADERS = { 'User-Agent': USER_AGENT }
 con = sqlite3.connect("quotes.db")
 cur = con.cursor()
 
+# Use a requests Session in order to enable retries.
+session = requests.Session()
+retries = Retry(total=5, backoff_factor=1)
+session.mount("https://", HTTPAdapter(max_retries=retries))
+
 cur.execute('''CREATE TABLE IF NOT EXISTS quotes
                (symbol text, date text, price real)''')
 cur.execute(
@@ -28,7 +34,7 @@ cur.execute(
 con.commit()
 
 # FND20410.NZ Foundation Series Growth Fund
-res = requests.get(
+res = session.get(
     "https://iisolutions.co.nz/fund-hosting/documents-and-reporting-2/", headers=HEADERS)
 table = pd.read_html(res.content)[1]
 for fund in table.iterrows():
@@ -42,7 +48,7 @@ for fund in table.iterrows():
     con.commit()
 
 # FND40819.NZ Foundation Series Total World Fund
-res = requests.get(
+res = session.get(
     "https://iisolutions.co.nz/fund-hosting/documents-and-reporting-2/", headers=HEADERS)
 table = pd.read_html(res.content)[1]
 for fund in table.iterrows():
@@ -56,7 +62,7 @@ for fund in table.iterrows():
     con.commit()
 
 # VAN1579.AU Vanguard International Shares Select Exclusions Index Fund
-res = requests.get(
+res = session.get(
     "https://www.vanguard.com.au/institutional/products/api/data/detail/au/inst/en/8122/wholesale/equity")
 json = json.loads(res.content)
 nav = json["fundDetail"]["fundData"]["dailyPrice"]["NAV"]
@@ -67,7 +73,7 @@ con.execute("REPLACE INTO quotes VALUES('VAN1579.AU', ?, ?)", [date, price])
 con.commit()
 
 # FND1423.NZ Harbour NZ Index Shares Fund
-res = requests.get("https://www.harbourasset.co.nz/our-funds/index-shares/", headers=HEADERS, timeout=60)
+res = session.get("https://www.harbourasset.co.nz/our-funds/index-shares/", headers=HEADERS)
 table = pd.read_html(res.text)[2]
 date = table["Date"][0]
 price = table["Unit Price NZD"][0]
@@ -99,7 +105,7 @@ except HTTPError:
     warnings.warn("Could not find Macquarie daily unit prices.")
 
 # FND2387.NZ Hunter Global Fixed Interest Fund
-#res = requests.get(
+#res = session.get(
 #    'https://www.morningstar.com.au/Funds/FundReport/24267', headers=HEADERS)
 #table = pd.read_html(res.content)[5]
 #buy = float(table[1][4])
@@ -114,7 +120,7 @@ except HTTPError:
 #con.commit()
 
 # FUEMAV30.VN MAFM VN30 ETF
-res = requests.get("https://finance.vietstock.vn/FUEMAV30-quy-etf-mafm-vn30.htm", headers=HEADERS)
+res = session.get("https://finance.vietstock.vn/FUEMAV30-quy-etf-mafm-vn30.htm", headers=HEADERS)
 table = pd.read_html(res.text)[1]
 for row in table.iterrows():
     date_str = row[1]["Ngày"]
