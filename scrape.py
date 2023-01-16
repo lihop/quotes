@@ -67,7 +67,7 @@ con.execute("REPLACE INTO quotes VALUES('VAN1579.AU', ?, ?)", [date, price])
 con.commit()
 
 # FND1423.NZ Harbour NZ Index Shares Fund
-res = requests.get("https://www.harbourasset.co.nz/our-funds/index-shares/")
+res = requests.get("https://www.harbourasset.co.nz/our-funds/index-shares/", headers=HEADERS, timeout=60)
 table = pd.read_html(res.text)[2]
 date = table["Date"][0]
 price = table["Unit Price NZD"][0]
