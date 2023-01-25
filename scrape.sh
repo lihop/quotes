@@ -14,6 +14,7 @@ if test -f "$VENV_FILE"; then
 fi
 
 # Scrape quotes.
+$(npm bin)/cypress run
 python ./scrape.py
 
 # Export latest quotes.
@@ -30,6 +31,10 @@ cat quotes/latest.json | sqlite-utils insert quotes.db quotes - --pk symbol --pk
 # Import Kernel quotes.
 cat kernel_quotes.json | sqlite-utils insert quotes.db quotes - --pk symbol --pk date --replace
 rm kernel_quotes.json
+
+# Import more precise Kernel quotes.
+cat kernel_quotes_precise.json | sqlite-utils insert quotes.db quotes - --pk symbol --pk date --replace
+rm kernel_quotes_precise.json
 
 # Re-export all quotes in JSON and CSV format.
 for format in "json" "csv"; do

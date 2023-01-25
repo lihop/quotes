@@ -27,12 +27,12 @@ jobs:
           packages: sqlite3
           debug: 'false'
       - name: Scrape quotes
-        run: |
-          $(npm bin)/cypress run
-          ./scrape.sh
+        run: ./scrape.sh
         env:
           CYPRESS_KERNEL_USERNAME: ${{ secrets.CYPRESS_KERNEL_USERNAME }}
           CYPRESS_KERNEL_PASSWORD: ${{ secrets.CYPRESS_KERNEL_PASSWORD }}
+          CYPRESS_SHARESIGHT_USERNAME: ${{ secrets.CYPRESS_SHARESIGHT_USERNAME }}
+          CYPRESS_SHARESIGHT_PASSWORD: ${{ secrets.CYPRESS_SHARESIGHT_PASSWORD }}
       - name: Update quotes
         uses: JamesIves/github-pages-deploy-action@v4
         with:
