@@ -22,7 +22,7 @@ sqlite3 -header -json quotes.db "SELECT * FROM quotes;" > quotes/latest.json
 
 # Import historical quotes.
 for symbol in ${SYMBOLS[@]}; do
-	(wget -O - https://raw.githubusercontent.com/lihop/quotes/gh-pages/${symbol}.json || echo "[]") | cat | sqlite-utils insert quotes.db quotes - --pk symbol --pk date --replace
+	(wget -O - https://lihop.github.io/quotes/${symbol}.json || echo "[]") | cat | sqlite-utils insert quotes.db quotes - --pk symbol --pk date --replace
 done
 
 # Re-import latest quotes.
