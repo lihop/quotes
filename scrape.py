@@ -65,9 +65,9 @@ for fund in table.iterrows():
 res = session.get(
     "https://www.vanguard.com.au/institutional/products/api/data/detail/au/inst/en/8122/wholesale/equity")
 json = json.loads(res.content)
-nav = json["fundDetail"]["fundData"]["dailyPrice"]["NAV"]
-price = nav["price"]
-date = dateutil.parser.isoparse(nav["effectiveDate"]).strftime('%Y-%m-%d')
+buy = json["fundDetail"]["fundData"]["priceHistoryShort"][0]["fundPrices"][0]
+price = buy["price"] / 1.0007
+date = dateutil.parser.isoparse(buy["asOfDate"]).strftime('%Y-%m-%d')
 assert date and price, "Could not determine date and/or price."
 con.execute("REPLACE INTO quotes VALUES('VAN1579.AU', ?, ?)", [date, price])
 con.commit()
