@@ -35,13 +35,13 @@ con.commit()
 
 # FND20410.NZ Foundation Series Growth Fund
 res = session.get(
-    "https://iisolutions.co.nz/fund-hosting/documents-and-reporting-2/", headers=HEADERS)
-table = pd.read_html(res.content)[1]
+    "https://www.fundrock.com/fundrock-new-zealand/frnz-documents-and-reporting/", headers=HEADERS)
+table = pd.read_html(res.content)[2]
 for fund in table.iterrows():
-    if fund[1]['Name'] != "Foundation Series Growth Fund":
+    if fund[1][0] != "Foundation Series Growth Fund":
         continue
-    price = fund[1]['Unit_Price']
-    date = datetime.strptime(fund[1]['Date'], '%Y-%m-%d').strftime('%Y-%m-%d')
+    price = fund[1][2]
+    date = datetime.strptime(fund[1][1], '%m/%d/%Y').strftime('%Y-%m-%d')
     assert date and price, "Could not determine date and/or price."
     con.execute("REPLACE INTO quotes VALUES('FND20410.NZ', ?, ?)",
                 [date, price])
@@ -49,13 +49,13 @@ for fund in table.iterrows():
 
 # FND40819.NZ Foundation Series Total World Fund
 res = session.get(
-    "https://iisolutions.co.nz/fund-hosting/documents-and-reporting-2/", headers=HEADERS)
-table = pd.read_html(res.content)[1]
+    "https://www.fundrock.com/fundrock-new-zealand/frnz-documents-and-reporting/", headers=HEADERS)
+table = pd.read_html(res.content)[2]
 for fund in table.iterrows():
-    if fund[1]['Name'] != "Foundation Series Total World Fund":
+    if fund[1][0] != "Foundation Series Total World Fund":
         continue
-    price = fund[1]['Unit_Price']
-    date = datetime.strptime(fund[1]['Date'], '%Y-%m-%d').strftime('%Y-%m-%d')
+    price = fund[1][2]
+    date = datetime.strptime(fund[1][1], '%m/%d/%Y').strftime('%Y-%m-%d')
     assert date and price, "Could not determine date and/or price."
     con.execute("REPLACE INTO quotes VALUES('FND40819.NZ', ?, ?)",
                 [date, price])
