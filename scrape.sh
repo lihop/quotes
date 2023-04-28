@@ -28,13 +28,9 @@ done
 # Re-import latest quotes.
 cat quotes/latest.json | sqlite-utils insert quotes.db quotes - --pk symbol --pk date --replace
 
-# Import Kernel quotes.
-cat kernel_quotes.json | sqlite-utils insert quotes.db quotes - --pk symbol --pk date --replace
-rm kernel_quotes.json
-
-# Import more precise Kernel quotes.
-cat kernel_quotes_precise.json | sqlite-utils insert quotes.db quotes - --pk symbol --pk date --replace
-rm kernel_quotes_precise.json
+# Import Foundation series quotes.
+cat foundation_quotes.json | sqlite-utils insert quotes.db quotes - --pk symbol --pk date --replace
+rm foundation_quotes.json
 
 # Re-export all quotes in JSON and CSV format.
 for format in "json" "csv"; do
