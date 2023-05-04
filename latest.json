@@ -16,8 +16,13 @@
   },
   {
     "symbol": "FND1423.NZ",
-    "date": "2023-05-02",
-    "price": 1.9330000000000000515
+    "date": "2023-05-03",
+    "price": 1.9109000000000000429
+  },
+  {
+    "symbol": "FUEMAV30.VN",
+    "date": "2023-05-04",
+    "price": 12269.999999999999999
   },
   {
     "symbol": "FUEMAV30.VN",
@@ -26,6 +31,5 @@
   },
   { "symbol": "FUEMAV30.VN", "date": "2023-04-27", "price": 12300.0 },
   { "symbol": "FUEMAV30.VN", "date": "2023-04-26", "price": 12350.0 },
-  { "symbol": "FUEMAV30.VN", "date": "2023-04-25", "price": 12190.0 },
-  { "symbol": "FUEMAV30.VN", "date": "2023-04-24", "price": 12420.0 }
+  { "symbol": "FUEMAV30.VN", "date": "2023-04-25", "price": 12190.0 }
 ]
