@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: CC0-1.0
 const FUNDS = {
-  "Foundation Series Total World Fund": "FND40819.NZ"
+  "Kernel S&P Global 100 Fund": "FND37632.NZ"
 };
 
 const concat = require("lodash/concat");
@@ -23,7 +23,7 @@ describe("", () => {
       }
     );
     cy.get('input[type="submit"]').click();
-    cy.get('[data-cy="HoldingName-25426"]').click();
+    cy.get('[data-cy="HoldingName-24692"]').click();
     cy.intercept(
       "https://charts.sharesight.com/charts/instrument_price_data.json?*"
     ).as("charts");
@@ -53,7 +53,7 @@ describe("", () => {
             allQuotes = concat(allQuotes, quotes);
           }
         });
-        cy.writeFile("foundation_quotes.json", allQuotes);
+        cy.writeFile("kernel_quotes_precise.json", allQuotes);
       });
     });
   });
