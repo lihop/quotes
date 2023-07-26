@@ -19,7 +19,11 @@
     "date": "2023-07-25",
     "price": 1.9571000000000000618
   },
-  { "symbol": "FUEMAV30.VN", "date": "2023-07-26", "price": 14190.0 },
+  {
+    "symbol": "FUEMAV30.VN",
+    "date": "2023-07-26",
+    "price": 14199.999999999999999
+  },
   { "symbol": "FUEMAV30.VN", "date": "2023-07-25", "price": 14190.0 },
   {
     "symbol": "FUEMAV30.VN",
