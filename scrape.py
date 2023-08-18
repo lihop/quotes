@@ -63,9 +63,9 @@ for fund in table.iterrows():
 
 # VAN1579.AU Vanguard International Shares Select Exclusions Index Fund
 res = session.get(
-    "https://www.vanguard.com.au/institutional/products/api/data/detail/au/inst/en/8122/wholesale/equity")
+    "https://www.vanguard.com.au/adviser/api/products/adviser/fund/8122/prices?limit=-1")
 json = json.loads(res.content)
-buy = json["fundDetail"]["fundData"]["priceHistoryShort"][0]["fundPrices"][0]
+buy = json["data"][0]["buyPrices"][0]
 price = buy["price"] / 1.0007
 date = dateutil.parser.isoparse(buy["asOfDate"]).strftime('%Y-%m-%d')
 assert date and price, "Could not determine date and/or price."
