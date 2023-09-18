@@ -121,7 +121,8 @@ con.commit()
 
 # FUEMAV30.VN MAFM VN30 ETF
 res = session.get("https://finance.vietstock.vn/FUEMAV30-quy-etf-mafm-vn30.htm", headers=HEADERS)
-table = pd.read_html(res.text)[1]
+table_html = bs(res.text, 'html.parser').find('table', {'id': 'stock-transactions'})
+table = pd.read_html(str(table_html))[0]
 for row in table.iterrows():
     date_str = row[1]["Ngày"]
     date = datetime.strptime(date_str, '%d/%m/%Y').strftime('%Y-%m-%d')
