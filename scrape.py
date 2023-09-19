@@ -33,20 +33,6 @@ cur.execute(
     "CREATE UNIQUE INDEX IF NOT EXISTS symbol_date_idx ON quotes (symbol, date)")
 con.commit()
 
-# FND20410.NZ Foundation Series Growth Fund
-res = session.get(
-    "https://www.fundrock.com/fundrock-new-zealand/frnz-documents-and-reporting/", headers=HEADERS)
-table = pd.read_html(res.content)[2]
-for fund in table.iterrows():
-    if fund[1][0] != "Foundation Series Growth Fund":
-        continue
-    price = fund[1][2]
-    date = datetime.strptime(fund[1][1], '%d/%m/%Y').strftime('%Y-%m-%d')
-    assert date and price, "Could not determine date and/or price."
-    con.execute("REPLACE INTO quotes VALUES('FND20410.NZ', ?, ?)",
-                [date, price])
-    con.commit()
-
 # FND40819.NZ Foundation Series Total World Fund
 res = session.get(
     "https://www.fundrock.com/fundrock-new-zealand/frnz-documents-and-reporting/", headers=HEADERS)
@@ -80,44 +66,6 @@ price = table["Unit Price NZD"][0]
 assert date and price, "Could not determine date and/or price."
 con.execute("REPLACE INTO quotes VALUES('FND1423.NZ', ?, ?)", [date, price])
 con.commit()
-
-## FND79.NZ Macquarie NZ Fixed Interest Fund
-## FND8205.NZ Macquarie NZ Shares Index Fund
-## FND8207.NZ Macquarie All Country Global Shares Index Fund
-#funds = [
-#    {'symbol': 'FND79.NZ', 'product_code': 'AIF F' },
-#    {'symbol': 'FND8205.NZ', 'product_code': 'AIF PE' },
-#    {'symbol': 'FND8207.NZ', 'product_code': 'AIF PI' },
-#]
-#try:
-#    dfs = read_pdf('https://secure.macquarie.co.nz/shared/DailyUnitPrices.pdf', user_agent=USER_AGENT, pages=1);
-#    df = dfs[0]
-#    for fund in funds:
-#        row = df.loc[df['Product Code'] == fund['product_code']]
-#        price = row['Base Price'].values[0]
-#        date_str = row['Date'].values[0]
-#        date = datetime.strptime(date_str, '%d/%m/%Y').strftime('%Y-%m-%d')
-#        assert date and price, "Could not determine date and/or price."
-#        con.execute("REPLACE INTO quotes VALUES(?, ?, ?)",
-#                    [fund['symbol'], date, price])
-#        con.commit()
-#except HTTPError:
-#    warnings.warn("Could not find Macquarie daily unit prices.")
-
-# FND2387.NZ Hunter Global Fixed Interest Fund
-#res = session.get(
-#    'https://www.morningstar.com.au/Funds/FundReport/24267', headers=HEADERS)
-#table = pd.read_html(res.content)[5]
-#buy = float(table[1][4])
-#sell = float(table[1][5])
-#assert sell == round(buy - (buy * 0.001),
-#                     4), "buy/sell prices not equal after adjusting for buy/sell spread."
-#price = buy
-#soup = bs(res.text, 'html.parser')
-#date_str = soup.find_all("p", {'class': 'fundreportsubheading'})[3].text
-#date = datetime.strptime(date_str, 'as at %d %b %Y').strftime('%Y-%m-%d')
-#con.execute("REPLACE INTO quotes VALUES(?, ?, ?)", ['FND2387.NZ', date, price])
-#con.commit()
 
 # FUEMAV30.VN MAFM VN30 ETF
 res = session.get("https://finance.vietstock.vn/FUEMAV30-quy-etf-mafm-vn30.htm", headers=HEADERS)
