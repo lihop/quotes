@@ -63,7 +63,8 @@ con.execute("REPLACE INTO quotes VALUES('VAN1579.AU', ?, ?)", [date, price])
 con.commit()
 
 # FND1423.NZ Harbour NZ Index Shares Fund
-res = session.get("https://www.harbourasset.co.nz/our-funds/index-shares/", headers=HEADERS, timeout=120)
+res = session.get("https://www.harbourasset.co.nz/our-funds/index-shares/",
+                  headers=HEADERS, timeout=120)
 table = pd.read_html(res.text)[2]
 date = table["Date"][0]
 price = table["Unit Price NZD"][0]
@@ -72,8 +73,10 @@ con.execute("REPLACE INTO quotes VALUES('FND1423.NZ', ?, ?)", [date, price])
 con.commit()
 
 # FUEMAV30.VN MAFM VN30 ETF
-res = session.get("https://finance.vietstock.vn/FUEMAV30-quy-etf-mafm-vn30.htm", headers=HEADERS)
-table_html = bs(res.text, 'html.parser').find('table', {'id': 'stock-transactions'})
+res = session.get(
+    "https://finance.vietstock.vn/FUEMAV30-quy-etf-mafm-vn30.htm", headers=HEADERS)
+table_html = bs(res.text, 'html.parser').find(
+    'table', {'id': 'stock-transactions'})
 table = pd.read_html(str(table_html))[0]
 for row in table.iterrows():
     date_str = row[1]["Ngày"]
