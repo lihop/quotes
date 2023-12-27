@@ -2,14 +2,17 @@
 #
 # SPDX-License-Identifier: CC0-1.0
 let
-  hostPkgs = import <nixpkgs> {};
-  pkgs = import (hostPkgs.fetchFromGitHub {
-    owner = "NixOS";
-    repo = "nixpkgs";
-    rev = "057f9aecfb71c4437d2b27d3323df7f93c010b7e";
-    sha256 = "sha256-MxCVrXY6v4QmfTwIysjjaX0XUhqBbxTWWB4HXtDYsdk=";
-  }) {};
-in hostPkgs.mkShell {
+  hostPkgs = import <nixpkgs> { };
+  pkgs = import
+    (hostPkgs.fetchFromGitHub {
+      owner = "NixOS";
+      repo = "nixpkgs";
+      rev = "057f9aecfb71c4437d2b27d3323df7f93c010b7e";
+      sha256 = "sha256-MxCVrXY6v4QmfTwIysjjaX0XUhqBbxTWWB4HXtDYsdk=";
+    })
+    { };
+in
+hostPkgs.mkShell {
   buildInputs = [
     pkgs.cypress
     pkgs.nodejs-18_x
