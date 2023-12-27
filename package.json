@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/lihop/fund-scraper#readme",
   "dependencies": {
-    "cypress": "^9.6.0",
+    "cypress": "^13.6.2",
     "lodash": "^4.17.21",
     "moment": "^2.29.3"
   }

@@ -6,17 +6,22 @@ let
   pkgs = import (hostPkgs.fetchFromGitHub {
     owner = "NixOS";
     repo = "nixpkgs";
-    rev = "5b4ee341ea0a5f2cad8ccd5725d0a63ed97ded38";
-    sha256 = "sha256-Ykt1BL5xPF4K6uh6j5KhZjUCCp+GE2d6QGKXApsWRlA=";
+    rev = "057f9aecfb71c4437d2b27d3323df7f93c010b7e";
+    sha256 = "sha256-MxCVrXY6v4QmfTwIysjjaX0XUhqBbxTWWB4HXtDYsdk=";
   }) {};
 in hostPkgs.mkShell {
   buildInputs = [
     pkgs.cypress
-    pkgs.nodejs-16_x
-    pkgs.python3
-    pkgs.python3.pkgs.requests
-    pkgs.python3.pkgs.numpy
-    pkgs.python3.pkgs.pandas
+    pkgs.nodejs-18_x
+    (pkgs.python3.withPackages (ps: with ps; [
+      beautifulsoup4
+      lxml
+      numpy
+      pandas
+      pip
+      requests
+      tabula-py
+    ]))
   ];
   shellHook = ''
     export CYPRESS_INSTALL_BINARY=0
