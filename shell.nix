@@ -18,8 +18,10 @@ hostPkgs.mkShell {
     pkgs.nodejs-18_x
     (pkgs.python3.withPackages (ps: with ps; [
       beautifulsoup4
+      fpdf
       lxml
       numpy
+      openpyxl
       pandas
       pip
       requests

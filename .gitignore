@@ -6,6 +6,7 @@ cypress/fixtures/
 cypress/plugins/
 cypress/support/
 cypress/videos/
+fif/*.pdf
 node_modules/
 quotes/
 kernel_quotes.json
