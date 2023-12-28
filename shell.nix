@@ -26,6 +26,7 @@ hostPkgs.mkShell {
       pandas
       pip
       requests
+      sqlite-utils
       tabula-py
     ]))
   ];
