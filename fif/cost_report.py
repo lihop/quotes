@@ -1,3 +1,8 @@
+#!/bin/python
+#
+# SPDX-FileCopyrightText: 2023 Leroy Hopson <copyright@leroy.nix.nz>
+# SPDX-License-Identifier: CC0-1.0
+
 import os
 import pandas as pd
 from decimal import *
