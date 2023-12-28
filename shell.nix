@@ -17,6 +17,7 @@ hostPkgs.mkShell {
     pkgs.cypress
     pkgs.nodejs-18_x
     (pkgs.python3.withPackages (ps: with ps; [
+      autopep8
       beautifulsoup4
       fpdf
       lxml
