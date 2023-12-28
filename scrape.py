@@ -12,6 +12,7 @@ import math
 import warnings
 from bs4 import BeautifulSoup as bs
 from datetime import datetime
+from io import StringIO
 from requests.adapters import HTTPAdapter, Retry
 from tabula import read_pdf
 from urllib.error import HTTPError
@@ -81,7 +82,7 @@ con.commit()
 # FND1423.NZ Harbour NZ Index Shares Fund
 res = session.get("https://www.harbourasset.co.nz/our-funds/index-shares/",
                   headers=HEADERS, timeout=120)
-table = pd.read_html(res.text)[2]
+table = pd.read_html(StringIO(res.text))[2]
 date = table["Date"][0]
 price = table["Unit Price NZD"][0]
 assert date and price, "Could not determine date and/or price."
@@ -93,7 +94,7 @@ res = session.get(
     "https://finance.vietstock.vn/FUEMAV30-quy-etf-mafm-vn30.htm", headers=HEADERS)
 table_html = bs(res.text, 'html.parser').find(
     'table', {'id': 'stock-transactions'})
-table = pd.read_html(str(table_html))[0]
+table = pd.read_html(StringIO(str(table_html)))[0]
 for row in table.iterrows():
     date_str = row[1]["Ngày"]
     date = datetime.strptime(date_str, '%d/%m/%Y').strftime('%Y-%m-%d')
