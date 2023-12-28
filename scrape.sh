@@ -1,6 +1,6 @@
 #!/bin/bash
-# SPDX-FileCopyrightText: 2022 Leroy Hopson <copyright@leroy.geek.nz>
 #
+# SPDX-FileCopyrightText: 2022 Leroy Hopson <copyright@leroy.nix.nz>
 # SPDX-License-Identifier: CC0-1.0
 set -e
 cd "$(dirname "$0")"

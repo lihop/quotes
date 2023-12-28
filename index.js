@@ -1,6 +1,6 @@
-// SPDX-FileCopyrightText: 2022 Leroy Hopson <copyright@leroy.geek.nz>
-//
+// SPDX-FileCopyrightText: 2022 Leroy Hopson <copyright@leroy.nix.nz>
 // SPDX-License-Identifier: CC0-1.0
+
 const PORT = 2022;
 
 const express = require("express");
