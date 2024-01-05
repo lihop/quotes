@@ -68,17 +68,6 @@ for fund in table.iterrows():
                 [date, price])
     con.commit()
 
-# VAN1579.AU Vanguard International Shares Select Exclusions Index Fund
-res = session.get(
-    "https://www.vanguard.com.au/adviser/api/products/adviser/fund/8122/prices?limit=-1")
-json = json.loads(res.content)
-buy = json["data"][0]["buyPrices"][0]
-price = buy["price"] / 1.0007
-date = dateutil.parser.isoparse(buy["asOfDate"]).strftime('%Y-%m-%d')
-assert date and price, "Could not determine date and/or price."
-con.execute("REPLACE INTO quotes VALUES('VAN1579.AU', ?, ?)", [date, price])
-con.commit()
-
 # FND1423.NZ Harbour NZ Index Shares Fund
 res = session.get("https://www.harbourasset.co.nz/our-funds/index-shares/",
                   headers=HEADERS, timeout=120)
