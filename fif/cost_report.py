@@ -97,7 +97,7 @@ def generate_fif_report(name, data):
         day_cost = Decimal(0)
 
         for index, row in transactions.iterrows():
-            day_cost += Decimal(row['Net Transaction Value'][3:])
+            day_cost += Decimal(row['Net Transaction Value'][3:].replace(',', ''))
             fee_str = f'{currency} 0.00' if pd.isna(
                 row['Fees']) else row['Fees']
 
