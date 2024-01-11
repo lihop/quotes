@@ -93,4 +93,18 @@ for row in table.iterrows():
                 [date, price])
     con.commit()
 
+# FND78.NZ Mercer Macquarie NZ Cash Fund
+res = session.get(
+    "https://digital.feprecisionplus.com/mercer-nz/en-au/MercerNZ/DownloadTool/GetPriceHistory?jsonString=%7B%22GrsProjectId%22%3A%2217200147%22%2C%22ProjectName%22%3A%22mercer-nz%22%2C%22ToolId%22%3A16%2C%22LanguageId%22%3A%227%22%2C%22LanguageCode%22%3A%22en-au%22%2C%22UnitHistoryFilters%22%3A%7B%22CitiCode%22%3A%22XOCV%22%2C%22Universe%22%3A%22GL%22%2C%22TypeCode%22%3A%22FGL%3AXOCV%22%2C%22BaseCurrency%22%3A%22NZD%22%2C%22PriceType%22%3A2%2C%22TimePeriod%22%3A%221%22%7D%7D", headers=HEADERS)
+data = res.json()
+for item in data['DataList']:
+    price = item['Price']['Price']['Amount']
+    print(item)
+    print(item['Price']['PriceDate'])
+    date = dateutil.parser.parse(item['Price']['PriceDate']).strftime('%Y-%m-%d')
+    assert date and price, "Could not determine date and/or price."
+    con.execute("REPLACE INTO quotes VALUES('FND78.NZ', ?, ?)",
+                [date, price])
+    con.commit()
+
 con.close()
