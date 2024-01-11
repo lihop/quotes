@@ -20,6 +20,7 @@ hostPkgs.mkShell {
       autopep8
       beautifulsoup4
       fpdf
+      html5lib
       lxml
       numpy
       openpyxl
