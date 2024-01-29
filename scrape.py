@@ -17,7 +17,7 @@ from requests.adapters import HTTPAdapter, Retry
 from tabula import read_pdf
 from urllib.error import HTTPError
 
-USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
+USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
 HEADERS = {'User-Agent': USER_AGENT, 'Accept-Langage': 'en-NZ'}
 
 con = sqlite3.connect("quotes.db")
