@@ -5,6 +5,7 @@ _build/
 cypress/fixtures/
 cypress/plugins/
 cypress/support/
+cypress/screenshots/
 cypress/videos/
 fif/*.pdf
 node_modules/

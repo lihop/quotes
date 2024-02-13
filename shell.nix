@@ -15,7 +15,7 @@ in
 hostPkgs.mkShell {
   buildInputs = [
     pkgs.cypress
-    pkgs.nodejs-18_x
+    pkgs.nodejs_20
     (pkgs.python3.withPackages (ps: with ps; [
       autopep8
       beautifulsoup4

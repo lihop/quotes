@@ -13,14 +13,19 @@ jobs:
     name: "Check REUSE Compliance"
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: fsfe/reuse-action@v1
   scrape:
     name: "Update Quotes"
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - run: npm ci
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.9'
           cache: 'pip'
@@ -30,6 +35,9 @@ jobs:
           packages: sqlite3
       - name: Scrape quotes
         run: ./scrape.sh
+        env:
+          CYPRESS_SHARESIGHT_USERNAME: ${{ secrets.CYPRESS_SHARESIGHT_USERNAME }}
+          CYPRESS_SHARESIGHT_PASSWORD: ${{ secrets.CYPRESS_SHARESIGHT_PASSWORD }}
       - name: Update quotes
         uses: JamesIves/github-pages-deploy-action@v4
         with:

@@ -1,11 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # SPDX-FileCopyrightText: 2022 Leroy Hopson <copyright@leroy.nix.nz>
 # SPDX-License-Identifier: CC0-1.0
 set -e
 cd "$(dirname "$0")"
 
-SYMBOLS=("FND40819.NZ" "VAN1579.AU" "FND1423.NZ" "FUEMAV30.VN" "FND78.NZ")
+SYMBOLS=("FND40600.NZ" "FND40819.NZ" "VAN1579.AU" "FND1423.NZ" "FUEMAV30.VN" "FND78.NZ")
 
 # Activate python virtual environment if available.
 VENV_FILE=.venv/bin/activate
@@ -14,6 +14,7 @@ if test -f "$VENV_FILE"; then
 fi
 
 # Scrape quotes.
+npx cypress run
 python ./scrape.py
 
 # Export latest quotes.
@@ -26,6 +27,10 @@ done
 
 # Re-import latest quotes.
 cat quotes/latest.json | sqlite-utils insert quotes.db quotes - --pk symbol --pk date --replace
+
+# Import Kernel quotes.
+cat kernel_quotes.json | sqlite-utils insert quotes.db quotes - --pk symbol --pk date --replace
+rm kernel_quotes.json
 
 # Re-export all quotes in JSON and CSV format.
 for format in "json" "csv"; do

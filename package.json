@@ -1,18 +1,27 @@
 {
-  "name": "fund-scraper",
+  "name": "quotes",
   "version": "0.0.0",
   "description": "Scrape quotes of various funds",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lihop/fund-scraper.git"
+    "url": "git+https://github.com/lihop/quotes.git"
   },
   "author": "Leroy Hopson",
   "license": "CC0-1.0",
   "bugs": {
-    "url": "https://github.com/lihop/fund-scraper/issues"
+    "url": "https://github.com/lihop/quotes/issues"
   },
-  "homepage": "https://github.com/lihop/fund-scraper#readme"
+  "homepage": "https://github.com/lihop/quotes#readme",
+  "dependencies": {
+    "cypress": "^13.6.2",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.3"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
 }
