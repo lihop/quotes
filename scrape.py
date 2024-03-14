@@ -105,4 +105,46 @@ for item in data['DataList']:
                 [date, price])
     con.commit()
 
+# FND452.NZ UniSaver Growth
+custom_fund_headers = {
+    'User-Agent': USER_AGENT,
+    'Accept': 'application/json, text/javascript, */*; q=0.01',
+    'Origin': 'https://www.youraccountonline.com',
+}
+
+custom_fund_data = json.dumps({
+    "Request": {
+        "SvcToken": "null",
+        "Resource": "Superfacts",
+        "Action": "GetPubUnitPriceHistory",
+        "ParamData": {
+            "UPHistStartDate": "",
+            "FullHistory": False,
+            "ClientCode": "NZUSS",
+            "DatabaseCode": "UNINZ"
+        }
+    }
+})
+
+res = session.post(
+    "https://secure.superfacts.com/sfsvc/v5/jsonutilsvc/JSONUtilityService.svc/ProcessPubRequest",
+    headers=custom_fund_headers, data=custom_fund_data)
+
+# Remove the UTF-8 BOM if it's present
+res_text = res.content.decode('utf-8-sig')
+
+data = json.loads(res_text)
+unit_prices = data['ResultData']['UnitPriceData']['UnitPrices']
+for unit_price in unit_prices:
+    if unit_price['Code'] == "USGROW_DEF":
+        price = unit_price['CurExitPrice']
+        break
+
+date = data['ResultData']['UnitPriceData']['UPHistEndDate']
+date_formatted = datetime.strptime(date, '%d/%m/%Y').strftime('%Y-%m-%d')
+
+assert date_formatted and price, "Could not determine date and/or price for FND452.NZ."
+cur.execute("REPLACE INTO quotes VALUES('FND452.NZ', ?, ?)", [date_formatted, price])
+con.commit()
+
 con.close()
