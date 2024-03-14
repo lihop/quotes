@@ -1,0 +1,667 @@
+[
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-09-01",
+    "price": 1.2080
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-09-04",
+    "price": 1.2091
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-09-05",
+    "price": 1.2108
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-09-06",
+    "price": 1.2078
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-09-07",
+    "price": 1.2037
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-09-08",
+    "price": 1.2016
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-09-11",
+    "price": 1.2001
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-09-12",
+    "price": 1.2020
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-09-13",
+    "price": 1.2011
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-09-14",
+    "price": 1.2010
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-09-15",
+    "price": 1.2076
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-09-18",
+    "price": 1.2051
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-09-19",
+    "price": 1.2027
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-09-20",
+    "price": 1.1989
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-09-21",
+    "price": 1.1945
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-09-22",
+    "price": 1.1843
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-09-25",
+    "price": 1.1817
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-09-26",
+    "price": 1.1822
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-09-27",
+    "price": 1.1724
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-09-28",
+    "price": 1.1715
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-09-29",
+    "price": 1.1708
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-10-02",
+    "price": 1.1697
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-10-03",
+    "price": 1.1671
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-10-04",
+    "price": 1.1584
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-10-05",
+    "price": 1.1606
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-10-06",
+    "price": 1.1598
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-10-09",
+    "price": 1.1651
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-10-10",
+    "price": 1.1645
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-10-11",
+    "price": 1.1723
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-10-12",
+    "price": 1.1769
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-10-13",
+    "price": 1.1772
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-10-16",
+    "price": 1.1747
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-10-17",
+    "price": 1.1756
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-10-18",
+    "price": 1.1777
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-10-19",
+    "price": 1.1708
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-10-20",
+    "price": 1.1633
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-10-24",
+    "price": 1.1544
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-10-25",
+    "price": 1.1553
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-10-26",
+    "price": 1.1490
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-10-27",
+    "price": 1.1433
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-10-30",
+    "price": 1.1407
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-10-31",
+    "price": 1.1437
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-11-01",
+    "price": 1.1480
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-11-02",
+    "price": 1.1561
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-11-03",
+    "price": 1.1704
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-11-06",
+    "price": 1.1748
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-11-07",
+    "price": 1.1790
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-11-08",
+    "price": 1.1796
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-11-09",
+    "price": 1.1794
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-11-10",
+    "price": 1.1762
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-11-13",
+    "price": 1.1821
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-11-14",
+    "price": 1.1815
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-11-15",
+    "price": 1.1926
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-11-16",
+    "price": 1.1959
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-11-17",
+    "price": 1.1956
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-11-20",
+    "price": 1.1979
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-11-21",
+    "price": 1.2005
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-11-22",
+    "price": 1.1972
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-11-23",
+    "price": 1.2018
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-11-24",
+    "price": 1.2011
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-11-27",
+    "price": 1.1994
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-11-28",
+    "price": 1.1972
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-11-29",
+    "price": 1.1977
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-11-30",
+    "price": 1.1969
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-12-01",
+    "price": 1.2003
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-12-04",
+    "price": 1.2055
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-12-05",
+    "price": 1.2040
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-12-06",
+    "price": 1.2039
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-12-07",
+    "price": 1.2062
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-12-08",
+    "price": 1.2087
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-12-11",
+    "price": 1.2113
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-12-12",
+    "price": 1.2132
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-12-13",
+    "price": 1.2140
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-12-14",
+    "price": 1.2243
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-12-15",
+    "price": 1.2297
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-12-18",
+    "price": 1.2278
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-12-19",
+    "price": 1.2298
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-12-20",
+    "price": 1.2314
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-12-21",
+    "price": 1.2245
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-12-22",
+    "price": 1.2302
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-12-27",
+    "price": 1.2304
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-12-28",
+    "price": 1.2354
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2023-12-29",
+    "price": 1.2373
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-01-03",
+    "price": 1.2371
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-01-04",
+    "price": 1.2303
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-01-05",
+    "price": 1.2299
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-01-08",
+    "price": 1.2279
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-01-09",
+    "price": 1.2354
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-01-10",
+    "price": 1.2358
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-01-11",
+    "price": 1.2373
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-01-12",
+    "price": 1.2377
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-01-15",
+    "price": 1.2396
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-01-16",
+    "price": 1.2404
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-01-17",
+    "price": 1.2373
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-01-18",
+    "price": 1.2317
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-01-19",
+    "price": 1.2339
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-01-22",
+    "price": 1.2397
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-01-23",
+    "price": 1.2423
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-01-24",
+    "price": 1.2465
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-01-25",
+    "price": 1.2465
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-01-26",
+    "price": 1.2514
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-01-29",
+    "price": 1.2530
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-01-30",
+    "price": 1.2578
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-01-31",
+    "price": 1.2569
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-02-01",
+    "price": 1.2478
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-02-02",
+    "price": 1.2556
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-02-05",
+    "price": 1.2617
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-02-07",
+    "price": 1.2589
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-02-08",
+    "price": 1.2628
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-02-09",
+    "price": 1.2623
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-02-12",
+    "price": 1.2608
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-02-13",
+    "price": 1.2607
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-02-14",
+    "price": 1.2544
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-02-15",
+    "price": 1.2569
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-02-16",
+    "price": 1.2619
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-02-19",
+    "price": 1.2625
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-02-20",
+    "price": 1.2602
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-02-21",
+    "price": 1.2554
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-02-22",
+    "price": 1.2571
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-02-23",
+    "price": 1.2680
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-02-26",
+    "price": 1.2696
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-02-27",
+    "price": 1.2675
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-02-28",
+    "price": 1.2686
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-02-29",
+    "price": 1.2724
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-03-01",
+    "price": 1.2745
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-03-04",
+    "price": 1.2796
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-03-05",
+    "price": 1.2804
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-03-06",
+    "price": 1.2752
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-03-07",
+    "price": 1.2794
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-03-08",
+    "price": 1.2844
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-03-11",
+    "price": 1.2841
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-03-12",
+    "price": 1.2827
+  },
+  {
+    "symbol": "FND452.NZ",
+    "date": "2024-03-13",
+    "price": 1.2894
+  }
+]
