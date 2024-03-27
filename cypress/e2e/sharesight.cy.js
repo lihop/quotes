@@ -24,6 +24,7 @@ describe("", () => {
     );
     cy.get('input[type="submit"]').click();
     cy.get('[data-cy="HoldingName-25445"]').click();
+    cy.contains('a', 'old holdings page').click();
     cy.intercept(
       "https://charts.sharesight.com/charts/instrument_price_data.json?*"
     ).as("charts");
