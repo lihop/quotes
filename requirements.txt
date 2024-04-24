@@ -13,7 +13,7 @@ distro==1.8.0
 et-xmlfile==1.1.0
 fpdf==1.7.2
 html5lib==1.1
-idna==3.4
+idna==3.7
 jdcal==1.4.1
 JPype1==1.4.1
 lxml==4.9.3
