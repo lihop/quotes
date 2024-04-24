@@ -5,7 +5,7 @@
 set -e
 cd "$(dirname "$0")"
 
-SYMBOLS=("FND40819.NZ" "FND1423.NZ" "FUEMAV30.VN" "FND78.NZ" "FND452.NZ" "FND40600.NZ")
+SYMBOLS=("FND40819.NZ" "FND42839.NZ" "FND1423.NZ" "FUEMAV30.VN" "FND78.NZ" "FND452.NZ" "FND40600.NZ")
 
 # Activate python virtual environment if available.
 VENV_FILE=.venv/bin/activate
