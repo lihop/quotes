@@ -28,7 +28,7 @@ describe("", () => {
     cy.intercept(
       "https://*/charts/instrument_price_data.json?*"
     ).as("charts");
-    cy.wait("@charts", { timeout: 60000 }).then(interception => {
+    cy.wait("@charts", { timeout: 120000 }).then(interception => {
       cy.get("span.dull").then(el => {
         const lastUpdated = moment(
           el.text(),

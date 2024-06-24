@@ -4,6 +4,7 @@
   "description": "Scrape quotes of various funds",
   "main": "index.js",
   "scripts": {
+    "cypress": "cypress",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,7 +18,7 @@
   },
   "homepage": "https://github.com/lihop/quotes#readme",
   "dependencies": {
-    "cypress": "^13.6.2",
+    "cypress": "^13.2.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.3"
   },
