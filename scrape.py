@@ -99,7 +99,8 @@ res = session.get(
 data = res.json()
 for item in data['DataList']:
     price = item['Price']['Price']['Amount']
-    date = dateutil.parser.parse(item['Price']['PriceDate']).strftime('%Y-%m-%d')
+    date = dateutil.parser.parse(
+        item['Price']['PriceDate']).strftime('%Y-%m-%d')
     assert date and price, "Could not determine date and/or price."
     con.execute("REPLACE INTO quotes VALUES('FND78.NZ', ?, ?)",
                 [date, price])
@@ -122,7 +123,8 @@ res = session.get(
 data = res.json()
 for item in data['DataList']:
     price = item['Price']['Price']['Amount']
-    date = dateutil.parser.parse(item['Price']['PriceDate']).strftime('%Y-%m-%d')
+    date = dateutil.parser.parse(
+        item['Price']['PriceDate']).strftime('%Y-%m-%d')
     assert date and price, "Could not determine date and/or price."
     con.execute("REPLACE INTO quotes VALUES('FND8205.NZ', ?, ?)",
                 [date, price])
