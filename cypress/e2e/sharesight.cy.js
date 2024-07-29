@@ -24,15 +24,12 @@ describe("", () => {
     );
     cy.get('input[type="submit"]').click();
     cy.get('[data-cy="HoldingName-25445"]').click();
-    cy.contains('a', 'old holdings page').click();
-    cy.intercept(
-      "https://*/charts/instrument_price_data.json?*"
-    ).as("charts");
+    cy.intercept("https://*/charts/instrument_price_data.json?*").as("charts");
     cy.wait("@charts", { timeout: 120000 }).then(interception => {
-      cy.get("span.dull").then(el => {
+      cy.get('span[class^="DulledTextstyled"]').then(el => {
         const lastUpdated = moment(
-          el.text(),
-          "[Updated at] DD MMM YYYY, h:mma z"
+          el.text().replace(" Updated at ", ""),
+          "DD MMMM YYYY, h:mm A Z"
         );
 
         const dates = get(interception, "response.body.graph.xAxis.categories");
