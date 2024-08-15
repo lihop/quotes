@@ -36,13 +36,15 @@ con.commit()
 
 # FND40819.NZ Foundation Series Total World Fund
 res = session.get(
-    "https://www.fundrock.com/fundrock-new-zealand/frnz-documents-and-reporting/", headers=HEADERS)
+    "https://www.fundrock.com/fundrock-new-zealand/frnz-documents-and-reporting/",
+    headers=HEADERS)
 table = pd.read_html(res.content)[2]
 for fund in table.iterrows():
     if fund[1][0] != "Foundation Series Total World Fund":
         continue
     price = fund[1][2]
-    # Date formatting is inconsistent, so parse in both formats and pick whichever is closest to today.
+    # Date formatting is inconsistent, so parse in both formats and pick
+    # whichever is closest to today.
     try:
         us_date = datetime.strptime(
             fund[1][1], '%m/%d/%Y').strftime('%Y-%m-%d')
@@ -58,7 +60,10 @@ for fund in table.iterrows():
         us_date_obj = datetime.strptime(us_date, '%Y-%m-%d')
         non_us_date_obj = datetime.strptime(non_us_date, '%Y-%m-%d')
         date = us_date if abs(
-            (us_date_obj - today).days) < abs((non_us_date_obj - today).days) else non_us_date
+            (us_date_obj -
+             today).days) < abs(
+            (non_us_date_obj -
+             today).days) else non_us_date
     elif us_date:
         date = us_date
     elif non_us_date:
@@ -80,7 +85,8 @@ con.commit()
 
 # FUEMAV30.VN MAFM VN30 ETF
 res = session.get(
-    "https://finance.vietstock.vn/FUEMAV30-quy-etf-mafm-vn30.htm", headers=HEADERS)
+    "https://finance.vietstock.vn/FUEMAV30-quy-etf-mafm-vn30.htm",
+    headers=HEADERS)
 table_html = bs(res.text, 'html.parser').find(
     'table', {'id': 'stock-transactions'})
 table = pd.read_html(StringIO(str(table_html)))[0]
@@ -108,7 +114,8 @@ for item in data['DataList']:
 
 # FND452.NZ UniSaver Growth
 res = session.get(
-    "https://www.unisaver.co.nz/investments/latest-returns/#compare", headers=HEADERS)
+    "https://www.unisaver.co.nz/investments/latest-returns/#compare",
+    headers=HEADERS)
 table = pd.read_html(StringIO(res.text))[0]
 date = datetime.strptime(
     table.columns[1], 'Current price %d/%m/%Y').strftime('%Y-%m-%d')
