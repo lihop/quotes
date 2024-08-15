@@ -5,12 +5,14 @@
 
 import requests
 import json
+import csv
 import sqlite3
 import dateutil.parser
 import pandas as pd
 import math
 import warnings
 from bs4 import BeautifulSoup as bs
+from collections import deque
 from datetime import datetime
 from io import StringIO
 from requests.adapters import HTTPAdapter, Retry
@@ -134,6 +136,34 @@ for item in data['DataList']:
         item['Price']['PriceDate']).strftime('%Y-%m-%d')
     assert date and price, "Could not determine date and/or price."
     con.execute("REPLACE INTO quotes VALUES('FND8205.NZ', ?, ?)",
+                [date, price])
+    con.commit()
+
+# FND43092.NZ Hedeged Global Bond Fund
+res = session.get(
+    "https://simplicity.kiwi/api/download_prices?fund_name=INVHedged%20Global%20Bond",
+    headers=HEADERS)
+data = csv.reader(res.text.splitlines())
+header = next(data)
+for row in deque(data, 7):
+    date = datetime.strptime(row[0], '%d-%m-%Y').strftime('%Y-%m-%d')
+    price = row[1]
+    assert date and price, "Could not determine date and/or price."
+    con.execute("REPLACE INTO quotes VALUES('FND43092.NZ', ?, ?)",
+                [date, price])
+    con.commit()
+
+# FND9381.NZ NZ Bond Fund
+res = session.get(
+    "https://simplicity.kiwi/api/download_prices?fund_name=INVNZ%20Bond",
+    headers=HEADERS)
+data = csv.reader(res.text.splitlines())
+header = next(data)
+for row in deque(data, 7):
+    date = datetime.strptime(row[0], '%d-%m-%Y').strftime('%Y-%m-%d')
+    price = row[1]
+    assert date and price, "Could not determine date and/or price."
+    con.execute("REPLACE INTO quotes VALUES('FND9381.NZ', ?, ?)",
                 [date, price])
     con.commit()
 
