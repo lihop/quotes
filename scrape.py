@@ -13,7 +13,7 @@ import math
 import warnings
 from bs4 import BeautifulSoup as bs
 from collections import deque
-from datetime import datetime
+from datetime import datetime, timedelta
 from io import StringIO
 from requests.adapters import HTTPAdapter, Retry
 from tabula import read_pdf
@@ -125,6 +125,37 @@ price = float(table[table.columns[1]][0].replace('$', ''))
 assert date and price, "Could not determine date and/or price."
 con.execute("REPLACE INTO quotes VALUES('FND452.NZ', ?, ?)", [date, price])
 con.commit()
+headers = {'Origin': 'https://www.youraccountonline.com'}
+data = {
+    "Request": {
+        "Resource": "Superfacts",
+        "Action": "GetPubUnitPriceHistory",
+        "ParamData": {
+            "UPHistStartDate": (
+                datetime.now() -
+                timedelta(
+                    days=7)).strftime("%d/%m/%Y"),
+            "FullHistory": True,
+            "ClientCode": "NZUSS",
+            "DatabaseCode": "UNINZ"}}}
+res = session.post(
+    "https://secure.superfacts.com/sfsvc/v5/jsonutilsvc/JSONUtilityService.svc/ProcessPubRequest",
+    headers=(
+        HEADERS | headers),
+    data=json.dumps(data))
+res.encoding = 'utf-8-sig'
+unit_prices = res.json()['ResultData']['UnitPriceData']['UnitPrices']
+for unit_price in unit_prices:
+    if unit_price['Code'] == 'USGROW_DEF':
+        date = datetime.strptime(
+            unit_price['EffectiveStartDate'],
+            '%d/%m/%Y').strftime('%Y-%m-%d')
+        price = float(unit_price['ExitPrice'])
+        assert date and price, "Could not determine date and/or price."
+        con.execute(
+            "REPLACE INTO quotes VALUES('FND452.NZ', ?, ?)", [
+                date, price])
+        con.commit()
 
 # FND8205.NZ Mercer NZ Shares Passive Fund
 res = session.get(
