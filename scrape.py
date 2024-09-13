@@ -101,6 +101,22 @@ for row in table.iterrows():
                 [date, price])
     con.commit()
 
+# FUEVN100.VN VinaCapital VN100 EETF
+res = session.get(
+    "https://finance.vietstock.vn/FUEVN100-vn100-etf.htm",
+    headers=HEADERS)
+table_html = bs(res.text, 'html.parser').find(
+    'table', {'id': 'stock-transactions'})
+table = pd.read_html(StringIO(str(table_html)))[0]
+for row in table.iterrows():
+    date_str = row[1]["Ngày"]
+    date = datetime.strptime(date_str, '%d/%m/%Y').strftime('%Y-%m-%d')
+    price = row[1]["Giá đóng cửa"]
+    assert date and price, "Could not determine date and/or price."
+    con.execute("REPLACE INTO quotes VALUES('FUEVN100.VN', ?, ?)",
+                [date, price])
+    con.commit()
+
 # FND78.NZ Mercer Macquarie NZ Cash Fund
 res = session.get(
     "https://digital.feprecisionplus.com/mercer-nz/en-au/MercerNZ/DownloadTool/GetPriceHistory?jsonString=%7B%22GrsProjectId%22%3A%2217200147%22%2C%22ProjectName%22%3A%22mercer-nz%22%2C%22ToolId%22%3A16%2C%22LanguageId%22%3A%227%22%2C%22LanguageCode%22%3A%22en-au%22%2C%22UnitHistoryFilters%22%3A%7B%22CitiCode%22%3A%22XOCV%22%2C%22Universe%22%3A%22GL%22%2C%22TypeCode%22%3A%22FGL%3AXOCV%22%2C%22BaseCurrency%22%3A%22NZD%22%2C%22PriceType%22%3A2%2C%22TimePeriod%22%3A%221%22%7D%7D", headers=HEADERS)
