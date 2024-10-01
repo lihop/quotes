@@ -39,7 +39,7 @@ jobs:
           CYPRESS_SHARESIGHT_USERNAME: ${{ secrets.CYPRESS_SHARESIGHT_USERNAME }}
           CYPRESS_SHARESIGHT_PASSWORD: ${{ secrets.CYPRESS_SHARESIGHT_PASSWORD }}
       - name: Update quotes
-        uses: JamesIves/github-pages-deploy-action@v4.6.4
+        uses: JamesIves/github-pages-deploy-action@v4.6.8
         with:
           branch: gh-pages
           folder: quotes
