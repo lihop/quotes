@@ -137,7 +137,7 @@ res = session.get(
 table = pd.read_html(StringIO(res.text))[0]
 date = datetime.strptime(
     table.columns[1], 'Current price %d/%m/%Y').strftime('%Y-%m-%d')
-price = float(table[table.columns[1]][0].replace('$', ''))
+price = float(table[table.columns[1]][1].replace('$', ''))
 assert date and price, "Could not determine date and/or price."
 con.execute("REPLACE INTO quotes VALUES('FND452.NZ', ?, ?)", [date, price])
 con.commit()
