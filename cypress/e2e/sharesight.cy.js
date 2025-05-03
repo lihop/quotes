@@ -48,6 +48,7 @@ describe("", () => {
           get(interception, "response.body.graph.series").forEach(fund => {
             if (keys(FUNDS).includes(fund.name)) {
               const quotes = get(fund, "data", [])
+		.filter(quote => !!quote)
                 .map((quote, i) => ({
                   symbol: FUNDS[fund.name],
                   date: moment(dates[i], "DD MMM YY"),
