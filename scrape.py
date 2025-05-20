@@ -49,12 +49,12 @@ for fund in table.iterrows():
     # whichever is closest to today.
     try:
         us_date = datetime.strptime(
-            fund[1][1], '%m-%d-%Y').strftime('%Y-%m-%d')
+            fund[1][1], '%m/%d/%Y').strftime('%Y-%m-%d')
     except ValueError:
         us_date = None
     try:
         non_us_date = datetime.strptime(
-            fund[1][1], '%d-%m-%Y').strftime('%Y-%m-%d')
+            fund[1][1], '%d/%m/%Y').strftime('%Y-%m-%d')
     except ValueError:
         non_us_date = None
     today = datetime.today()
