@@ -45,34 +45,29 @@ for fund in table.iterrows():
     if fund[1][0] != "Foundation Series Total World Fund":
         continue
     price = fund[1][2]
-    # Date formatting is inconsistent, so parse in both formats and pick
+    # Date formatting is inconsistent, so parse in multiple formats and pick
     # whichever is closest to today.
+    raw_date = fund[1][1].replace('-', '/')
     try:
-        us_date = datetime.strptime(
-            fund[1][1], '%m/%d/%Y').strftime('%Y-%m-%d')
+        us_date = datetime.strptime(raw_date, '%m/%d/%Y')
     except ValueError:
         us_date = None
     try:
-        non_us_date = datetime.strptime(
-            fund[1][1], '%d/%m/%Y').strftime('%Y-%m-%d')
+        non_us_date = datetime.strptime(raw_date, '%d/%m/%Y')
     except ValueError:
         non_us_date = None
     today = datetime.today()
     if us_date and non_us_date:
-        us_date_obj = datetime.strptime(us_date, '%Y-%m-%d')
-        non_us_date_obj = datetime.strptime(non_us_date, '%Y-%m-%d')
         date = us_date if abs(
-            (us_date_obj -
+            (us_date -
              today).days) < abs(
-            (non_us_date_obj -
+            (non_us_date -
              today).days) else non_us_date
-    elif us_date:
-        date = us_date
-    elif non_us_date:
-        date = non_us_date
+    else:
+        date = (us_date if us_date else non_us_date)
     assert date and price, "Could not determine date and/or price."
     con.execute("REPLACE INTO quotes VALUES('FND40819.NZ', ?, ?)",
-                [date, price])
+                [date.strftime('%Y-%m-%d'), price])
     con.commit()
 
 # FND1423.NZ Harbour NZ Index Shares Fund
