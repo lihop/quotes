@@ -7,8 +7,8 @@ let
     (hostPkgs.fetchFromGitHub {
       owner = "NixOS";
       repo = "nixpkgs";
-      rev = "057f9aecfb71c4437d2b27d3323df7f93c010b7e";
-      sha256 = "sha256-MxCVrXY6v4QmfTwIysjjaX0XUhqBbxTWWB4HXtDYsdk=";
+      rev = "a343533bccc62400e8a9560423486a3b6c11a23b";
+      sha256 = "sha256-TofHtnlrOBCxtSZ9nnlsTybDnQXUmQrlIleXF1RQAwQ=";
     })
     { };
 in
@@ -16,6 +16,8 @@ hostPkgs.mkShell {
   buildInputs = [
     pkgs.cypress
     pkgs.nodejs_20
+    pkgs.playwright-driver.browsers
+    pkgs.jq
     (pkgs.python3.withPackages (ps: with ps; [
       autopep8
       beautifulsoup4
@@ -34,6 +36,11 @@ hostPkgs.mkShell {
   shellHook = ''
     export CYPRESS_INSTALL_BINARY=0
     export CYPRESS_RUN_BINARY=${pkgs.cypress}/bin/Cypress
+    export PLAYWRIGHT_BROWSERS_PATH=${pkgs.playwright-driver.browsers}
+    export PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS=true
+    
+    # Use the playwright-driver browsers directly
+    export PLAYWRIGHT_LAUNCH_OPTIONS_EXECUTABLE_PATH="${pkgs.playwright-driver.browsers}/chromium-1091/chrome-linux/chrome"
 
     # Tells pip to put packages into $PIP_PREFIX instead of the usual locations.
     # See https://pip.pypa.io/en/stable/user_guide/#environment-variables.

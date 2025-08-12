@@ -30,6 +30,7 @@ jobs:
           python-version: '3.9'
           cache: 'pip'
       - run: pip install -r requirements.txt
+      - run: npx playwright install chromium
       - uses: awalsh128/cache-apt-pkgs-action@v1
         with:
           packages: sqlite3
@@ -38,6 +39,8 @@ jobs:
         env:
           CYPRESS_SHARESIGHT_USERNAME: ${{ secrets.CYPRESS_SHARESIGHT_USERNAME }}
           CYPRESS_SHARESIGHT_PASSWORD: ${{ secrets.CYPRESS_SHARESIGHT_PASSWORD }}
+          KERNEL_USERNAME: ${{ secrets.KERNEL_USERNAME }}
+          KERNEL_PASSWORD: ${{ secrets.KERNEL_PASSWORD }}
       - name: Update quotes
         uses: JamesIves/github-pages-deploy-action@v4.7.3
         with:
