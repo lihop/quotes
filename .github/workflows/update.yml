@@ -13,13 +13,13 @@ jobs:
     name: "Check REUSE Compliance"
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: fsfe/reuse-action@v5
   scrape:
     name: "Update Quotes"
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/setup-node@v4
         with:
           node-version: 20
