@@ -11,9 +11,8 @@ import dateutil.parser
 import pandas as pd
 import math
 import warnings
-from bs4 import BeautifulSoup as bs
 from collections import deque
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from io import StringIO
 from requests.adapters import HTTPAdapter, Retry
 from tabula import read_pdf
@@ -81,36 +80,26 @@ con.execute("REPLACE INTO quotes VALUES('FND1423.NZ', ?, ?)", [date, price])
 con.commit()
 
 # FUEMAV30.VN MAFM VN30 ETF
-res = session.get(
-    "https://finance.vietstock.vn/FUEMAV30-quy-etf-mafm-vn30.htm",
-    headers=HEADERS)
-table_html = bs(res.text, 'html.parser').find(
-    'table', {'id': 'stock-transactions'})
-table = pd.read_html(StringIO(str(table_html)))[0]
-for row in table.iterrows():
-    date_str = row[1]["Ngày"]
-    date = datetime.strptime(date_str, '%d/%m/%Y').strftime('%Y-%m-%d')
-    price = row[1]["Giá đóng cửa"]
-    assert date and price, "Could not determine date and/or price."
-    con.execute("REPLACE INTO quotes VALUES('FUEMAV30.VN', ?, ?)",
-                [date, price])
-    con.commit()
-
-# FUEVN100.VN VinaCapital VN100 EETF
-res = session.get(
-    "https://finance.vietstock.vn/FUEVN100-vn100-etf.htm",
-    headers=HEADERS)
-table_html = bs(res.text, 'html.parser').find(
-    'table', {'id': 'stock-transactions'})
-table = pd.read_html(StringIO(str(table_html)))[0]
-for row in table.iterrows():
-    date_str = row[1]["Ngày"]
-    date = datetime.strptime(date_str, '%d/%m/%Y').strftime('%Y-%m-%d')
-    price = row[1]["Giá đóng cửa"]
-    assert date and price, "Could not determine date and/or price."
-    con.execute("REPLACE INTO quotes VALUES('FUEVN100.VN', ?, ?)",
-                [date, price])
-    con.commit()
+# FUEVN100.VN VinaCapital VN100 ETF
+session.get("https://finance.vietstock.vn/FUEVN100-vn100-etf.htm", headers=HEADERS)
+cookies = {c.name: c.value for c in session.cookies}
+end_ts = int(datetime.now().timestamp())
+start_ts = int((datetime.now() - timedelta(days=30)).timestamp())
+for symbol, code in [('FUEMAV30', 'FUEMAV30.VN'), ('FUEVN100', 'FUEVN100.VN')]:
+    res = session.get(
+        f"https://api.vietstock.vn/ta/history?symbol={symbol}&resolution=D&from={start_ts}&to={end_ts}&countback=30",
+        headers={**HEADERS, 'Referer': 'https://finance.vietstock.vn/'},
+        cookies=cookies,
+    )
+    data = res.json()
+    if isinstance(data, str):
+        data = json.loads(data)
+    assert data.get('s') == 'ok', f"Unexpected API response for {symbol}: {data}"
+    for ts, price in zip(data['t'], data['c']):
+        date = datetime.fromtimestamp(ts, tz=timezone.utc).strftime('%Y-%m-%d')
+        assert date and price, "Could not determine date and/or price."
+        con.execute("REPLACE INTO quotes VALUES(?, ?, ?)", [code, date, price])
+        con.commit()
 
 # FND78.NZ Mercer Macquarie NZ Cash Fund
 res = session.get(
